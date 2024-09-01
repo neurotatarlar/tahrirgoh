@@ -14,20 +14,20 @@
   </div>
   <form [formGroup]="form" (submit)="onSubmit()" class="mt-2 space-y-4 flex flex-col gap-1">
     <mat-form-field>
-      <mat-label>Eski</mat-label>
+      <mat-label>Иске</mat-label>
       <input matInput [(ngModel)]="oldText" name="oldText" spellcheck="false" formControlName="oldText">
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Yangi</mat-label>
+      <mat-label>Яңа</mat-label>
       <input matInput [(ngModel)]="newText" name="newText" spellcheck="false" formControlName="newText">
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <mat-label>Xatolik turi</mat-label>
+      <mat-label>Хата төре</mat-label>
       <input type="text"
-             placeholder="Bittasini tanlang"
-             aria-label="Xatolik turi"
+             placeholder="Берсен сайлагыз"
+             aria-label="Хата төре"
              matInput
              [(ngModel)]="errorType"
              formControlName="errorType"
@@ -39,6 +39,6 @@
       </mat-autocomplete>
     </mat-form-field>
 
-    <button class="btn btn-action" [disabled]="form.invalid">Tahrirlash</button>
+    <button class="btn btn-action" [disabled]="form.invalid">Тамгаларга</button>
   </form>
 </div>

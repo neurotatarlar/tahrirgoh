@@ -22,7 +22,7 @@
           </button>
         </div>
         <a routerLink="" class="inline-flex items-center justify-between space-x-3">
-          <span class="sr-only">Tahrirchi</span>
+          <span class="sr-only">Тамгадар</span>
           <svg class="h-10" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M0 15.105C0 9.87411 0 7.25867 1.00183 5.2537C1.92136 3.41342 3.41342 1.92136 5.2537 1.00183C7.25867 0 9.87411 0 15.105 0H22.895C28.1259 0 30.7413 0 32.7463 1.00183C34.5866 1.92136 36.0786 3.41342 36.9982 5.2537C38 7.25867 38 9.87411 38 15.105V22.895C38 28.1259 38 30.7413 36.9982 32.7463C36.0786 34.5866 34.5866 36.0786 32.7463 36.9982C30.7413 38 28.1259 38 22.895 38H15.105C9.87411 38 7.25867 38 5.2537 36.9982C3.41342 36.0786 1.92136 34.5866 1.00183 32.7463C0 30.7413 0 28.1259 0 22.895V15.105Z"
@@ -58,7 +58,7 @@
               </linearGradient>
             </defs>
           </svg>
-          <span class="font-extrabold text-3xl">Tahrirgoh</span>
+          <span class="font-extrabold text-3xl">Тамгадар</span>
         </a>
       </div>
     </div>
@@ -68,21 +68,21 @@
       class="basis-1/5 hidden lg:flex lg:space-x-8 tracking-wide flex-grow text-tahrirchi-main-text font-semibold justify-center">
 
       <p *ngIf="authService.userValue">
-              Tahrirchi: <span class="capitalize">{{authService.userValue.username}}</span>
+              Тамгадар: <span class="capitalize">{{authService.userValue.username}}</span>
       </p>
 
     </div>
 
     <div class="flex space-x-6" *ngIf="authService.userInfo$ | async">
       <div class="flex space-x-1">
-        <p>Tahrirlar soni:</p>
+        <p>Тамгалар саны:</p>
         <p class="font-bold" matTooltip="Umumiy">{{(authService.userInfo$ | async).annotations_added}}</p>
         <p class="font-bold text-tahrirchi-error" matTooltip="Imlo">{{(authService.userInfo$ | async).error_type_count.spelling}}</p>
         <p class="font-bold text-tahrirchi-yellow-500" matTooltip="Punktuatsiya">{{(authService.userInfo$ | async).error_type_count.punctuation}}</p>
         <p class="font-bold text-tahrirchi-purple" matTooltip="Grammatika">{{(authService.userInfo$ | async).error_type_count.grammar}}</p>
         <p class="font-bold text-tahrirchi-gradient-end" matTooltip="Ravonlik">{{(authService.userInfo$ | async).error_type_count.fluency}}</p>
       </div>
-      <p>To'plangan kredit: <span  class="font-bold">{{(authService.userInfo$ | async).calculated_score | currency:'UZS':''}}</span>&nbsp;UZS</p>
+      <p>Тупланган кредит: <span  class="font-bold">{{(authService.userInfo$ | async).calculated_score | currency:'RUB':''}}</span>&nbsp;RUB</p>
     </div>
 
 

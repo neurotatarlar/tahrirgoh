@@ -6,7 +6,7 @@
     <mat-form-field class="w-full" appearance="fill">
       <mat-label>Исем</mat-label>
       <input type="text" matInput formControlName="username" placeholder="Мәсәлән, Вәли" autocomplete="username"/>
-      <mat-error *ngIf="username?.hasError('required')"> Исемегезне кертегез <strong>shart!</strong> </mat-error>
+      <mat-error *ngIf="username?.hasError('required')"> Исемегезне кертегез </mat-error>
     </mat-form-field>
 
     <mat-form-field class="w-full" appearance="fill">
@@ -16,7 +16,7 @@
       <mat-error *ngIf="password?.hasError('minlength')">
         Серсүздә кимендә 6 билге былырга тиеш
       </mat-error>
-      <mat-error *ngIf="password?.hasError('required')"> Серсузне кертегез <strong>shart!</strong> </mat-error>
+      <mat-error *ngIf="password?.hasError('required')"> Серсузне кертегез </mat-error>
     </mat-form-field>
 
     <button class="w-full btn btn-gradient" type="submit" [disabled]="form.disabled">

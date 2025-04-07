@@ -7,6 +7,8 @@ import typer
 import yaml
 from rich import print
 from typing_extensions import Annotated
+import json
+from rich.progress import Progress
 
 app = typer.Typer(context_settings={"help_option_names": ["-h", "--help"]})
 users_app = typer.Typer()
@@ -65,7 +67,7 @@ def _headers(config):
     }
 
 
-def _generate_strong_password(length=32):
+def _generate_strong_password(length=16):
     return ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(length))
 
 
@@ -153,7 +155,7 @@ def reward_user(
 def list_sentences(
         reviewer: Annotated[str, typer.Option("--reviewer", "-r", help="Filter by reviewer's username")] = None,
         error_type: Annotated[str, typer.Option("--error-type", "-e", help="Filter by error type")] = None,
-        include_all: Annotated[bool, typer.Option("--all", "-a", help="Enable to include all sentences")] = False,
+        include_all: Annotated[bool, typer.Option("--all", "-a", help="Enable to include all sentences")] = True,
         today: Annotated[bool, typer.Option("--today", "-t", help="Enable to filter by today's sentences")] = False
 ):
     """
@@ -201,15 +203,30 @@ def add_sentence(
         print(f"File with sentences is not found by path `{path}`")
         raise typer.Abort()
     else:
-        with open(path, "r") as f:
-            _request(
-                "post",
-                "/sentence",
-                json=None,
-                data=f,
-                success_msg="Sentences added",
-                err_msg="Error adding sentences"
-            )
+        chunk_size = 100
+        total = None
+        with Progress() as progress:
+            task = progress.add_task("Uploading sentences")
+            while True:
+                with open(path, "r") as f:
+                    data = json.load(f)
+                if not data:
+                    break
+                if total is None:
+                    total = len(data)
+                    progress.update(task, total=total)
+                chunk = data[:chunk_size]
+                remain = data[chunk_size:]
+                _request(
+                    "post",
+                    "/sentence",
+                    json=chunk,
+                    success_msg=None,
+                    err_msg="Error adding sentences"
+                )
+                with open(path, "w") as f:
+                    json.dump(remain, f, indent=4, ensure_ascii=False)
+                progress.update(task, advance=chunk_size)
 
 
 if __name__ == "__main__":
